@@ -18,9 +18,11 @@ class TaskApplicationTests {
 
 	@Test
 	void whenCallingTheApi_returnBody_success() {
-		ResponseEntity<Object> response = restTemplate.getForEntity("/prices/BTCUSDT",
-				Object.class);
+		ResponseEntity<PriceDto> response = restTemplate.getForEntity("/prices/BTCUSDT",
+				PriceDto.class);
 
 		assertEquals(response.getStatusCode(), HttpStatus.OK);
+		Assertions.assertNotNull(response.getBody());
+		assertEquals(response.getBody().getSymbol(), "BTCUSDT");
 	}
 }

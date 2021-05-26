@@ -1,4 +1,4 @@
-package com.searchmetrics.task;
+package com.searchmetrics.task.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

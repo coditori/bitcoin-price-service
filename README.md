@@ -1,8 +1,12 @@
 # bitcoin-price-service
 I'm trying to get bitcoin-usdt price from Binance Api, then show the price in the response
 
-### Getting Bitcoin
-We just have one and only one symbol here "BTCUSDT" then we can omit getting any URL param/query from the user side. In case of emergency (if any error happen during getting data) the api will try 20 times every 20 seconds to get the data and there is no need for sending request again.
+### Data Source (Binance API)
+#### Rate Data
+I'm using a response DTO instead of Object to validate data inside test. Ticker Price API can be found here: https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#symbol-price-ticker
+
+#### Historical Data
+I'm using Kline Endpoint for getting history data, the documentation can be found here: https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#klinecandlestick-data
 
 ### Test
 I'm using Junit 5 and black box testing here

@@ -24,6 +24,9 @@ I'm using Kline Endpoint for getting history data, we could use object mapping t
 ### Tests
 I'm using Junit 5 and black box testing here.
 
+### Structure
+I'm using a runner to be run first based on time period (in configuration) then put the bitcoin rate on ratesCache to be used later on by rates endpoint.
+
 ### Going to production
 - The cache layer can be improved by Spring cache manager or distributed hash tables or using a key/value database like Redis (for having a better I choice we need more information about the product)
 - Swagger could be also used to improve the documentation part.

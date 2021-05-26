@@ -27,7 +27,8 @@ class RatesControllerTests {
 
 	@BeforeAll
 	public void init() throws InterruptedException {
-	    Thread.sleep(10000);
+		// wait for CacheService to be filled
+	    Thread.sleep(2000);
 	}
 
 	@Test

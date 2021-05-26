@@ -28,10 +28,26 @@ public class RatesRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         logger.debug("RatesRunner is running...");
+
+        // we use "runInstantly" to prevent waiting for period amount of time in Flux.interval
+        runInstantly();
+        runPeriodicallyBasedOnPeriod();
+    }
+
+    private void runInstantly() {
+        logger.debug("runInstantly is running...");
+        ApiUtil.callApi(bitcoinRateURI)
+                .bodyToMono(PriceDto.class)
+                .doOnNext(x -> cacheService.ratesCache.put("BTCUSDT", x))
+                .subscribe();
+    }
+
+    private void runPeriodicallyBasedOnPeriod() {
+        logger.debug("runPeriodicallyBasedOnPeriod is running...");
         Flux.interval(Duration.ofSeconds(period))
                 .onBackpressureDrop()
                 .flatMap(x -> ApiUtil.callApi(bitcoinRateURI).bodyToMono(PriceDto.class))
                 .doOnNext(x -> cacheService.ratesCache.put("BTCUSDT", x))
-                .subscribe(x -> System.out.println("x = " + x));
+                .subscribe();
     }
 }

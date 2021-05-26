@@ -8,7 +8,7 @@ I'm trying to:
 I'm using a response DTO instead of Object to validate data inside test. Ticker Price API can be found here: https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#symbol-price-ticker
 
 #### Historical Data
-I'm using Kline Endpoint for getting history data, the documentation can be found here: https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#klinecandlestick-data
+I'm using Kline Endpoint for getting history data, we could use object mapping to replace numeric keys with human-readable keys, like "closeTime". The documentation can be found here: https://github.com/binance/binance-spot-api-docs/blob/master/rest-api.md#klinecandlestick-data
 
 ### Exceptions
 - "rates" endpoint will check the cache for fetching bitcoin, if it's not there we will get 204 as the response statusCode.

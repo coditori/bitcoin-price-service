@@ -10,7 +10,6 @@ public final class ApiUtil {
 
      */
     public static WebClient.ResponseSpec callApi(String uri) {
-        System.out.println("start getting data");
         return webclient.get()
                 .uri(uri)
                 .accept(MediaType.APPLICATION_JSON)

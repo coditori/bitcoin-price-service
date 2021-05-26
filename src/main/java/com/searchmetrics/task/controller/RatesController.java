@@ -1,22 +1,25 @@
 package com.searchmetrics.task.controller;
 
-import com.searchmetrics.task.dto.PriceDto;
-import com.searchmetrics.task.util.ApiUtil;
+import com.searchmetrics.task.cache.CacheService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RatesController {
-    private static final String latestPriceBaseURI = "https://crypto.bahabin.com/binance/api/v3/ticker/price?symbol=";
+    private final String BITCOIN_SYMBOL = "BTCUSDT";
 
-    @GetMapping("/rates/{symbol}")
-    public Mono getBTCPrice(@PathVariable("symbol") String symbol) {
-        String uri = latestPriceBaseURI + symbol;
-        return ApiUtil.callApi(uri)
-                .bodyToMono(PriceDto.class);
+    @Autowired
+    private CacheService cacheService;
+
+    @GetMapping("/rates/BTCUSDT")
+    public ResponseEntity getBTCPrice() {
+        if (cacheService.ratesCache.containsKey(BITCOIN_SYMBOL))
+            return ResponseEntity.ok(cacheService.ratesCache.get(BITCOIN_SYMBOL));
+
+        return ResponseEntity.accepted().build();
     }
 }

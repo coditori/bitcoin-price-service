@@ -31,9 +31,9 @@ class HistoriesControllerTests {
 	}
 
 	@Test
-	void whenCallingWrongHistoryEndpoint_returnBody_success() {
-		ResponseEntity<PriceDto> response = restTemplate.getForEntity("/histories/111111",
-				PriceDto.class);
+	void whenCallingWrongHistoryEndpoint_returnBody_fail() {
+		ResponseEntity<Object> response = restTemplate.getForEntity("/histories/111111",
+				Object.class);
 
 		assertNotEquals(response.getStatusCode(), HttpStatus.OK);
 	}

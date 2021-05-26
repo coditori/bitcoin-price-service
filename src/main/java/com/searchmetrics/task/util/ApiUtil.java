@@ -4,7 +4,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public final class ApiUtil {
-    public static final WebClient webclient = WebClient.create();
+    private static final WebClient webclient = WebClient.create();
 
     /*
 

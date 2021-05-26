@@ -1,3 +1,7 @@
+searchmetrics:
+  rates:
+    period: 5 # periods should be in seconds
+
 logging:
   level:
     com.searchmetrics: DEBUG
